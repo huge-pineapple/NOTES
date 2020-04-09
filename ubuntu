@@ -1,0 +1,6 @@
+watch -n nvidia-smi # GPU real-time usage
+sudo kill -9 PID # kill process
+
+~/.bashrc 
+export PATH=.. :$PATH
+source ~/.bashrc # global environment setting
