@@ -1,3 +1,5 @@
+// const的一些用法
+
 T* const p = &i; // 指针指向的对象可以改变，但指针本身的值不可以改变
 
   int i1 = 10;
@@ -15,6 +17,21 @@ const T* p = &j; // 指针指向的对象不可以改变，但指针本身的值
   j2 = 20; // 错误，指针指向的对象不可以改变
   
 const T* const p = &k; // 指针指向对象和指针本身的值都不可改变
-const T& value / 常量引用，不能改变引用的值
+const T& value // 常量引用，不能改变引用的值
+
   int value = 5;
-  const T& 
+  const int& constValue = value; // 正确，允许绑定同类型的非常量
+  constValue = 10; // 错误，不能改变引用的值
+  value = 15; // 正确，可以改变原值对constValue赋值
+
+// 虚函数的使用
+
+  存在于基类中，允许派生类重写该函数，避免出现一个派生类就重载一次该函数这样的冗余情况出现。
+  class base
+  {
+    public:
+      virtual void example1(); // 虚函数
+      virtual void example2() = 0; // 纯虚函数。作用：一、避免基类被实例化；二、避免函数example2()被要求在派生类中重新实现，却没有重新
+                                                     实现的情况发生。（两种情况编译都无法通过，方便找出bug）
+  }
+  
