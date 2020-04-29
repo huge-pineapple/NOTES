@@ -23,6 +23,15 @@ const T& value // 常量引用，不能改变引用的值
   const int& constValue = value; // 正确，允许绑定同类型的非常量
   constValue = 10; // 错误，不能改变引用的值
   value = 15; // 正确，可以改变原值对constValue赋值
+  
+T func() const {} // 这里的const是限定*this指针，因为this是隐含参数，所以采用这种形式
+因此，函数中不能有任何改变其所属对象成员变量值的功能，否则会在编译阶段就报错
+
+// this指针
+
+  this 是 const 指针，指向当前使用的对象。它的值是不能被修改的，一切企图修改该指针的操作，如赋值、递增、递减等都是不允许的
+  this 只能在成员函数内部使用，用在其他地方没有意义，也是非法的
+  只有当对象被创建后 this 才有意义，因此不能在 static 成员函数中使用
 
 // 虚函数的使用
 
@@ -34,4 +43,12 @@ const T& value // 常量引用，不能改变引用的值
       virtual void example2() = 0; // 纯虚函数。作用：一、避免基类被实例化；二、避免函数example2()被要求在派生类中重新实现，却没有重新
                                                      实现的情况发生。（两种情况编译都无法通过，方便找出bug）
   }
-  
+ 
+// 函数指针
+
+  double example(int x){return 0;} // 函数原型示例
+  double (*E)(int) // 函数指针示例
+  E = example; // 函数指针赋值
+  double y = example(int x); // 函数调用
+  double y = (*E)(int x); // 通过函数指针调用函数的推荐写法
+  double example2(int y, double (*E)(int x)); // 函数指针作为参数传递
