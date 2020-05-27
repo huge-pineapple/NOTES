@@ -52,3 +52,10 @@ T func() const {} // 这里的const是限定*this指针，因为this是隐含参
   double y = example(int x); // 函数调用
   double y = (*E)(int x); // 通过函数指针调用函数的推荐写法
   double example2(int y, double (*E)(int x)); // 函数指针作为参数传递
+
+//double 比较大小
+  
+  const double eps = 1x10e-6; // 一般精度设置负6次方就可以了，视情况而定
+  double a, b;
+  if(a> b+eps);
+  if(fabs(a-b)<eps); // 判断相等
