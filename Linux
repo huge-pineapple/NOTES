@@ -21,3 +21,8 @@ Firstly, convert .t7(cuda) to .t7(cpu)
 
 then, 
   model = torch.load_lua() # but the API has been removed after pytorch0.4.1
+  
+# github 
+  https://www.jianshu.com/p/8282eced3bf2
+  git pull --rebase origin master
+  git push origin master。
