@@ -106,6 +106,44 @@ T func() const {} // 这里的const是限定*this指针，因为this是隐含参
   memfunc_type memfunc = &[类名]::[成员函数名];
   std::thread t2(memfunc, &[类实例](对象指针), args[]);
 
-// inline 的使用
+// c++11 好用的新特性
 
+1. auto 在stl容器上表现突出，不保留const
+   decltype 推导表达式值类型，但不计算表达式，并且能保留const
+2. 基于范围的for循环 
+ex1 int Arr[5]{1,2,3,4,5}; for(int &x:Arr); 
+基于范围的for循环一般在循环开始之前就确定好迭代的范围，而不是在每次迭代之前去调用一次Arr.end()
+3. Lambda函数
+[capture](params)->ret { body};
 
+[ ]         ：无捕获，函数体内不能访问任何外部变量 
+[ =]        ：以值（拷贝）的方式捕获所有外部变量，函数体内可以访问，但是不能修改。
+[ &]        ：以引用的方式捕获所有外部变量，函数体内可以访问并修改（需要当心无效的引用）；
+[ var]      ：以值（拷贝）的方式捕获某个外部变量，函数体可以访问但不能修改。
+[ &var]     ：以引用的方式获取某个外部变量，函数体可以访问并修改
+[ this]     ：捕获this指针，可以访问类的成员变量和函数，
+[ =,&var]   ：引用捕获变量var，其他外部变量使用值捕获。
+[ &,var]    ：只捕获变量var，其他外部变量使用引用捕获。
+ex3
+auto f1 = [=](){ return x; };                       //以值方式捕获使用变量，不能修改
+auto f2 = [&](){ return ++x; };                  //以引用方式捕获所有变量，可以修改，但要当心引用无效
+auto f3 = [x](){ return x; };                      //以值方式捕获x，不能修改
+auto f4 = [x,&y](){ y += x; };                    //以值方式捕获x，以引用方式捕获y，y可以修改
+auto f5 = [&,y](){ x += y;};                      //以引用方式捕获y之外所有变量，y不能修改
+auto f6 = [&](){ y += ++x;};                    //以引用方式捕获所有变量，可以修改
+auto f7 = [](){ return x ;};                      //无捕获，不能使用外部变量，编译错误
+4. 后置返回类型
+ex4 
+template <typename T, typename U>
+auto add(T t, U u) -> decltype(t + u) {
+    return t + u;
+}
+auto SomeStruct::add(int x, int y) -> int {
+    return x + y;
+} // 也可以不用decltype, 显式给出类型int
+5. override和final
+virtual void example1() override;  // 编译器将去检查基类中有没有一个具有相同签名的虚函数，如果没有，编译器就会报错
+class Base final {};
+virtual void example2() final; // 防止基类被继承和防止子类重写函数
+6. tuple类型
+template <class ...Types> class tuple;
