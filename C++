@@ -147,3 +147,8 @@ class Base final {};
 virtual void example2() final; // 防止基类被继承和防止子类重写函数
 6. tuple类型
 template <class ...Types> class tuple;
+7. enum class 强类型枚举
+C++11 使用枚举的成员要加类作用域符
+ex7 enum class example
+{ var1 = 0; var2 = 1;}
+example::var1;
