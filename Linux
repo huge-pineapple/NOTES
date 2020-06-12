@@ -22,7 +22,12 @@ Firstly, convert .t7(cuda) to .t7(cpu)
 then, 
   model = torch.load_lua() # but the API has been removed after pytorch0.4.1
   
-# github 
+# git
   https://www.jianshu.com/p/8282eced3bf2
   git pull --rebase origin master
-  git push origin master。
+  git push origin master
+  git branch -a // check all existing branch 
+  git branch -d // delete branch
+  git checkout <branch name> // change to existing branch
+  git checkout -b <branch name> // create and change to new branch 
+  git log graph // check branch graph
