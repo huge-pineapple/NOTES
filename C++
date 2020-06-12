@@ -152,3 +152,12 @@ C++11 使用枚举的成员要加类作用域符
 ex7 enum class example
 { var1 = 0; var2 = 1;}
 example::var1;
+8. default 在自定义构造函数后，强制编译器生成无参构造函数
+class ex8
+{ public:
+    ex8(int _num){num = _num;} 
+    ex8() = default;
+  private:
+    int num;}
+9. 不同构造函数间可以相互调用
+10. c++11 出现constexpt关键字 c++14 改为constexpt返回值函数, 只要求返回值和参数为字面值即可
