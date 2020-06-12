@@ -30,4 +30,4 @@ then,
   git branch -d // delete branch
   git checkout <branch name> // change to existing branch
   git checkout -b <branch name> // create and change to new branch 
-  git log graph // check branch graph
+  git log --graph // check branch graph
