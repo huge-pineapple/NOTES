@@ -31,3 +31,13 @@ then,
   git checkout <branch name> // change to existing branch
   git checkout -b <branch name> // create and change to new branch 
   git log --graph // check branch graph
+
+# use branch
+  git checkout -b <branch name>
+  <do something>
+  git add <cpp>
+  git commit -m " "
+  git push origin <branch name>
+  git checkout master
+  git merge <branch name>
+  git branch -d <branch name>
