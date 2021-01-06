@@ -85,7 +85,7 @@ def pack_raw(raw):
 
     # Black levle = 0, USB Camera Format: Bayer GR12, 2^12-1 = 4095
     im = np.maximum(im, 0) / 4095
-    im = im.reshape(1280, 960)
+    im = im.reshape(960, 1280)
     im = np.expand_dims(im, axis=2)
     img_shape = im.shape
     H = img_shape[0]
