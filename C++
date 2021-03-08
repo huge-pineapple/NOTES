@@ -179,3 +179,7 @@ https://blog.csdn.net/daniel_ustc/article/details/23096229?utm_medium=distribute
 // 内存泄露 
 
 https://blog.csdn.net/lovely20085901/article/details/39050085
+
+// vector 扩容
+
+开辟一块原内存大小1.5倍的内存空间，将对象复制进去。
