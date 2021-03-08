@@ -161,3 +161,21 @@ class ex8
     int num;}
 9. 不同构造函数间可以相互调用
 10. c++11 出现constexpt关键字 c++14 改为constexpt返回值函数, 只要求返回值和参数为字面值即可
+
+// 深拷贝和浅拷贝
+
+浅： 创建指针指向被拷贝内存
+深： 创建指针，申请新内存空间，将被拷贝内存里对象复制到新内存中
+
+// shared_ptr<> 循环引用问题
+
+shared_ptr智能指针管理的对象，只有在引用计数减为0的时候才会释放。而循环引用发生的情况就是违反了上面所说的结论：引用计数不能递减到0，以至于对象不能释放。
+
+https://blog.csdn.net/daniel_ustc/article/details/23096229?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-0&spm=1001.2101.3001.4242
+
+解决办法，引入weak_ptr，它不能单独使用，只能配合shared_ptr使用。weak_ptr不能控制它所指向对象的生存期。
+将一个weak_ptr绑定到一个shared_ptr不会改变shared_ptr的引用计数。一旦最后一个指向对象的shared_ptr被销毁，那么对象就会被释放。
+
+// 内存泄露 
+
+https://blog.csdn.net/lovely20085901/article/details/39050085
