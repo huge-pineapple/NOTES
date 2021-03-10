@@ -243,3 +243,4 @@ public:
         return instance;
     }
 };
+Singleton* Singleton::pInstance = new Singleton;
