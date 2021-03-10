@@ -212,3 +212,34 @@ reinterpret_cast<> 全能转，尽量不使用
 
 1. 对于基本数据类型，无需调用构造析构函数，所以无区别
 2. 对于自建数据类型数组，new []返回数组首位地址，即数组中第一个对象的地址，delete只会调用一次析构函数就释放空间，delete[]则会为所有对象调用析构函数;
+
+// 单例模式
+
+1. 懒汉式
+class Singleton
+{
+public:
+    ~Singleton(){};
+    Singleton(Singleton&) = delete;
+    Singleton& operator=(const Singleton&) = delete;
+    static Singleton& get_instance()
+    {
+        static Singleton instance;
+        return instance;
+    };
+private:
+    Singleton(){};
+};
+
+2. 饿汉式
+class Singleton
+{
+private:
+    Singleton(){};
+    static Singleton* instance;
+public:
+    static Singleton* GetInstance()
+    {
+        return instance;
+    }
+};
