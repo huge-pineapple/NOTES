@@ -184,3 +184,31 @@ https://blog.csdn.net/lovely20085901/article/details/39050085
 
 开辟一块原内存大小1.5倍的内存空间，将对象复制进去，并释放原内存
 https://blog.csdn.net/rusbme/article/details/98102016
+
+// cast
+
+static_cast<> 用于不涉及继承机制的类型转换 int->double
+const_cast<> 常量转变量
+dynamic_cast<> 涉及继承机制，如基类转继承类
+reinterpret_cast<> 全能转，尽量不使用
+
+四种cast转换失败会抛出exception
+
+// 三五原则
+
+当重写了析构函数时，需要同时显示编写拷贝构造函数、赋值构造函数（三原则）、移动赋值构造函数、移动拷贝构造函数
+
+// new 和 malloc的区别
+
+1. malloc是C的库函数， new是C++运算符
+2. 因此new可以进行重载，malloc不行
+3. malloc申请的是OS中的堆内存空间， new申请的是自由存储区，自由存储区是编译器为new设定的特定概念，底层也是调用malloc，但是根据重载new也可以申请堆、栈等内存空间
+4. malloc可以alloc，new不行
+5. new自动计算申请的内存空间，malloc要工程师进行计算
+6. delete时先调用对象的析构函数再释放内存，free直接释放内存
+7. malloc内存申请失败返回null, new则抛出bad_alloc exception
+
+// delete和delete[]
+
+1. 对于基本数据类型，无需调用构造析构函数，所以无区别
+2. 对于自建数据类型数组，new []返回数组首位地址，即数组中第一个对象的地址，delete只会调用一次析构函数就释放空间，delete[]则会为所有对象调用析构函数;
