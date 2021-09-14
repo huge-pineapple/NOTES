@@ -236,11 +236,30 @@ class Singleton
 {
 private:
     Singleton(){};
-    static Singleton* instance;
+    static Singleton* instance = new Singleton();
 public:
     static Singleton* GetInstance()
     {
         return instance;
     }
 };
-Singleton* Singleton::pInstance = new Singleton;
+
+// 万能引用
+
+只有发生类型推导时，比如auto&&时，才是万能引用，引用值既可以是lvalue也可使rvalue
+确切的声明右值引用时，则必须是右值引用
+
+// 引用折叠（move的实现原理）
+引用折叠只有两条规则:
+
+一个 rvalue reference to an rvalue reference 会变成 (“折叠为”) 一个 rvalue reference.
+所有其他种类的"引用的引用" (i.e., 组合当中含有lvalue reference) 都会折叠为 lvalue reference.
+
+// static_cast<T>()
+static_cast<T>之所以能使用类型转换，是通过remove_refrence<T>::type模板移除T&&，T&的引用，获取具体类型T
+
+
+// forward
+所以催生了std::forward, 如果一个本身是"左值"的万能引用如果绑定在了一个"右边值"上面，就把它重新转换为右值。
+函数的名字 (“forward”) 的意思就是。我们希望在传递参数的时候，
+可以保存参数原来的lvalueness 或 rvalueness，即是说把参数转发给另一个函数。
